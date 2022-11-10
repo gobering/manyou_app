@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :labels
   get 'sessions/new'
   root "sessions#new"
   get "/" => "tasks#index"

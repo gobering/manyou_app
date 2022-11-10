@@ -8,6 +8,8 @@
     <%= form.text_field :title %>
     <%= form.label :ステータス検索 %>
     <%= form.select :status, Task.statuses.keys.to_a, {include_blank: "選択して下さい"} %>
+    <%= form.label :ラベル検索 %>
+    <%= form.select("label_id", Label.pluck(:name, :id), { include_blank: true }) %>
     <%= form.submit '検索' %>
   <% end %>  
 </div>
@@ -20,6 +22,7 @@
     <th>終了期限</th>
     <th>ステータス</th>
     <th>優先順位</th>
+    <th>ラベル</th>
   </tr>
 
 <% @tasks.each do |task| %>
@@ -30,6 +33,11 @@
     <td><%= task.deadline %></td>
     <td><%= task.status %></td>
     <td><%= task.priority %></td>
+    <td>
+      <% task.labels.each do |label| %>
+        <%= label.name %>
+      <% end %>
+    </td>
     <td><%= link_to '詳細', task_path(task.id), class: "btn btn-outline-primary" %></td>
     <td><%= link_to "編集", edit_task_path(task.id), class: "btn btn-outline-success" %></td>
     <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' }, class: "btn btn-outline-danger" %></td>

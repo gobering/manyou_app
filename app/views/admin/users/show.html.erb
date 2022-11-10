@@ -3,8 +3,15 @@
 <p>Eメール: <%= @user.email %></p>
 
 <p>制作したタスク:<p>
-<% @user.tasks.each do |task| %>
-  <table>
+<table>
+  <tr>
+    <th>タイトル</th>
+    <th>詳細</th>
+    <th>終了期限</th>
+    <th>ステータス</th>
+    <th>優先順位</th>
+  </tr>
+  <% @user.tasks.each do |task| %>
     <tr>
       <td><%= task.title %></td>
       <td><%= task.content %></td>
@@ -12,7 +19,9 @@
       <td><%= task.status %></td>
       <td><%= task.priority %></td>
     </tr>
-  </table>  
-<% end %>
+  <% end %>
+</table>  
+
 <%= link_to "編集する", edit_admin_user_path(@user) %>
-<%= link_to "一覧画面", admin_users_path %>
+<%= link_to "ユーザーの一覧画面", admin_users_path %>
+<%= link_to "ラベルの作成", labels_path %>
